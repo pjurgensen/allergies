@@ -13,7 +13,7 @@ end
 puts "What is your allergy score?"
 input = gets.chomp.to_s
 
-  if input.to_i.to_s == input
+  if (input.to_i.to_s == input) && (input.to_i >= 0 && input.to_i <= 255)
     input = input.to_i
     if input == 0
      puts "You are not allergic to anything. Yay!"
