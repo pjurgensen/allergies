@@ -1,26 +1,25 @@
 def allergy_score(number)
-  allergies = {1 => "eggs", 2 => "peanuts", 4 => "shellfish", 8 => "strawberries", 16 => "tomatoes", 32 => "chocolate", 64 => "pollen", 128 => "cats"}
-  number_array = [128, 64, 32, 16, 8, 4, 2, 1]
-  x = 0
+  allergies = {128 => "cats", 64 => "pollen", 32 => "chocolate", 16 => "tomatoes", 8 => "strawberries", 4 => "shellfish", 2 => "peanuts", 1 => "eggs"}
   all_allergies = []
-  number = number.to_s
-  if number.to_i.to_s == number
-    number = number.to_i
-    if number == 0
-      puts "You are not allergic to anything. Yay!"
-    else
-      while number > 0 && number <= 255 do
-          if number - number_array[x] >= 0
-            all_allergies.push(allergies[number_array[x]])
-            number = number - number_array[x]
-          end
-          x += 1
+    allergies.each do |score, allergy|
+      if number >= score
+        all_allergies.push(allergy)
+        number -= score
       end
     end
-    all_allergies
-  else
-    puts "Please enter a valid number"
-  end
+    "You are allergic to #{all_allergies[0..-2].join(", ")} and #{all_allergies[-1]}. Sorry :("
 end
 
-puts allergy_score("12")
+puts "What is your allergy score?"
+input = gets.chomp.to_s
+
+  if input.to_i.to_s == input
+    input = input.to_i
+    if input == 0
+     puts "You are not allergic to anything. Yay!"
+    else
+      puts allergy_score(input)
+    end
+  else
+    puts "Please enter a valid number."
+  end
